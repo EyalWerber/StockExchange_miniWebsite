@@ -1,0 +1,153 @@
+body {
+  background-image: linear-gradient(to top right, #c7f3fc, #e1f7f1);
+  height: 800px;
+}
+
+h4 {
+  margin: 0px;
+}
+hr {
+  margin: 0px;
+}
+
+a:link {
+  text-decoration: none;
+  font-weight: 600;
+}
+@keyframes moveLeft {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.marqueeText {
+  animation: moveLeft 60s linear infinite;
+  display: block;
+}
+.marqueeElement {
+  width: 100%;
+  height: 25px;
+  background-color: black;
+  color: white;
+
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.searchContainer {
+  background-color: #e2f4f5;
+
+  margin: 40px 20% 0 25%;
+  width: 50%;
+
+  border-radius: 6px;
+  padding: 30px;
+  box-shadow: 10px 10px 25px #0f7e92;
+
+  height: 120px;
+  transition: height 1s ease-out;
+  overflow: auto;
+}
+img {
+  height: 20px;
+}
+.searchContainer.prof {
+  width: 80%;
+  margin: 40px 30% 0 10%;
+  overflow: auto;
+}
+.searchContainer.flex {
+  margin: 30px;
+}
+
+.profImg {
+  height: 40px;
+}
+.listContainer {
+  margin-top: 20px;
+  margin-left: 0px;
+}
+.resultItem {
+  padding: 20px;
+  transition: background-color 0.2s ease;
+  border-bottom: 1.3px solid rgb(166, 182, 199);
+}
+.resultItem.flex {
+  margin: 0px;
+  justify-content: space-between;
+}
+.resultItem:hover {
+  background-color: aliceblue;
+  transition: background-color 0.3s ease;
+}
+.resultItem span {
+  font-size: 10px;
+  font-weight: bold;
+}
+.foundList {
+  padding-left: 0px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.foundList {
+  list-style-type: none;
+  margin: 0%;
+}
+
+.d-none {
+  display: none;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.spinner {
+  margin-left: 10px;
+  animation: loading 0.7s ease-in-out infinite;
+}
+input {
+  width: 70%;
+}
+.good {
+  color: #2dbe4b;
+}
+.bad {
+  color: tomato;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e1f4f8;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #81dff1;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5be4ff;
+}
+.highlight {
+  background-color: yellow;
+  display: inline;
+}
