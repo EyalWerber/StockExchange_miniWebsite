@@ -40,6 +40,7 @@ async function setProfilePage(symbol, parent) {
       description,
       website,
     } = profileData.profile;
+
     document.title = `@${companyName}`;
 
     elementsToCompose = [
@@ -67,13 +68,14 @@ async function setProfilePage(symbol, parent) {
 
 async function setProfileInfo(elementsToCompose, parent) {
   elementsToCompose = await elementsToCompose;
+
   for (const elemType of elementsToCompose) {
     const domElement = document.createElement(elemType.type); //Create dom element of type element.type
     domElement.classList.add(elemType.classList); //Add classes to dom element
 
     if (elemType.href) {
       //If element has an href, add it. If not, pass.
-      domElement.setAttribute("href", elemType.website);
+      domElement.setAttribute("href", elemType.href);
     }
 
     updateResultInDom(domElement, elemType.value); //Update dom elements inner HTML
