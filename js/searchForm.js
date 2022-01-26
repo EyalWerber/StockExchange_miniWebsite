@@ -1,37 +1,33 @@
-class searchForm {
+class SearchForm {
   constructor(form) {
-    this.searchInputElement = grabElement("searchInput");
-    this.searchButton = grabElement("searchButton");
+    this.searchInputElement = form.querySelector("input[name='searchInput']");
+    if (getQueryStringParams("query")) {
+      this.searchInputElement.value = getQueryStringParams("query");
+      this.doSearch();
+    }
 
-    this.formLogic();
-    this.resultList = new searchResult(grabElement("foundList"));
-    this.onSearch = () => {
-      this.searchWord = form.querySelector("input[name='searchInput']").value;
-      getServerResponse(this.searchWord, "search")
-        .then((res) => res.json())
-        .then((data) => {
-          this.resultList.renderResults(data);
-        });
-    };
+    this.searchButton = form.querySelector("button[id='searchButton']");
+
+    this.searchButton.onclick = debounce(this.doSearch.bind(this), 500);
+    this.searchInputElement.oninput = debounce(this.doSearch.bind(this), 500);
   }
-  formLogic() {
-    this.performSearch = debounce(this.performSearch, 500);
-    this.searchInputElement.addEventListener("input", this.performSearch);
-    this.searchButton.addEventListener("click", this.performSearch);
-    this.searchInputElement.value = getQueryStringParams("query"); //Sets search bar according to query string param
-    if (this.searchInputElement.value) this.searchButton.click(); //If there is a value in query, search.
+  onSearch(callback) {
+    this.searchCallbackFunc = callback;
   }
-  async performSearch() {
-    const searchWord = document.querySelector(
-      "input[name='searchInput']"
-    ).value;
+  async doSearch() {
+    toggleVisibility(loadSpinner, true);
+    const query = this.searchInputElement.value;
+    this.setQueryString(query);
+    const request = await getServerResponse(query, "search");
+    const companies = await request.json();
+
+    this.searchCallbackFunc(companies);
+  }
+  setQueryString(query) {
     if (history.pushState) {
-      let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?query=${searchWord}`;
+      let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?query=${query}`;
       window.history.pushState({ path: newurl }, "", newurl);
     }
-    toggleVisibility(loadSpinner, true);
-    grabElement("foundList").innerHTML = "";
-    search.onSearch();
   }
 }
 

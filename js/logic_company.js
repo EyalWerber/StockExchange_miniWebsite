@@ -40,7 +40,6 @@ async function setProfilePage(symbol, parent) {
       description,
       website,
     } = profileData.profile;
-
     document.title = `@${companyName}`;
 
     elementsToCompose = [
@@ -63,18 +62,18 @@ async function setProfilePage(symbol, parent) {
   //Iterate through
   setProfileInfo(elementsToCompose, parent);
   let historicalData = await getHistoryData(profileData.symbol); //Get historical data
+  toggleVisibility(document.getElementById("spinner"), false);
+  toggleVisibility(document.getElementById("graphSpinner"), true);
   setProfileGraph(historicalData); //set historical graph
 }
 
 async function setProfileInfo(elementsToCompose, parent) {
   elementsToCompose = await elementsToCompose;
-
   for (const elemType of elementsToCompose) {
     const domElement = document.createElement(elemType.type); //Create dom element of type element.type
     domElement.classList.add(elemType.classList); //Add classes to dom element
 
     if (elemType.href) {
-      //If element has an href, add it. If not, pass.
       domElement.setAttribute("href", elemType.href);
     }
 

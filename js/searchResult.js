@@ -1,4 +1,4 @@
-class searchResult {
+class SearchResult {
   constructor(element) {
     this.element = element;
     this.element.innerHTML = "";
@@ -16,7 +16,7 @@ class searchResult {
         "</div>" +
         text.substring(foundIndex + searchString.length);
     }
-    console.log(text);
+
     return text;
   }
   getAllResultSymbols(searchResult) {

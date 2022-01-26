@@ -4,7 +4,7 @@ const ctx = document.getElementById("hisoryGraph").getContext("2d");
 async function setProfileGraph(data) {
   data = await data;
 
-  toggleVisibility(document.getElementById("spinner"), false);
+  toggleVisibility(document.getElementById("graphSpinner"), false);
   const myChart = new Chart(ctx, {
     type: "line",
 

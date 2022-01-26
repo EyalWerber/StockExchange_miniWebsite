@@ -34,15 +34,18 @@
 <script src="./js/config.js"></script>
 <script src="./js/helper.js"></script>
 <script src="./js/Marquee.js"></script>
-<script src="./js/searchForm.js"></script>
-<script src="./js/searchResult.js"></script>
+<script src="./js/SearchForm.js"></script>
+<script src="./js/SearchResult.js"></script>
 
 <script>
   (async function(){
     markquee = new Marquee(document.getElementById("marqueeElement"));
     markquee.load();
-    search = new searchForm(grabElement("searchContainer"));
-    search.onSearch()
+    search = new SearchForm(grabElement("searchContainer"));
+    results = new SearchResult(grabElement("foundList"))
+    search.onSearch((companies)=>{
+      results.renderResults(companies)
+    })
     
   })()
 </script>
